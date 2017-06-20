@@ -6,9 +6,11 @@ class Drug
 
   end
 
-  def self.find_by_name(name)
-
-
+  def self.find_id_by_name(db, name)
+    sql = <<-SQL
+    SELECT id FROM drugs WHERE name = ?;
+    SQL
+    db.execute(sql, name)
   end
 
   def self.insert_row(db, name)
@@ -18,7 +20,8 @@ class Drug
     SQL
 
     db.execute(sql,name)
-    @id = db.execute("SELECT last_insert_rowid() FROM cohorts")[0][0]
+    @id = db.execute("SELECT last_insert_rowid() FROM drugs")[0][0]
+
 
   end
 
