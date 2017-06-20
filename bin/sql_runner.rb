@@ -21,5 +21,12 @@ class SQLRunner
     end
   end
 
+  def enter_data(data)
+    data.each do |row|
+      cohort_id = Cohort.insert_row(self.db, row["age"], row["n"])
+      
+    end
+  end
+
 
 end
