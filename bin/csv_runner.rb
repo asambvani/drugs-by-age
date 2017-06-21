@@ -62,14 +62,19 @@ class CSVRunner
     end
   end
 
+  def enter_cohorts_drugs_data(cohort_id, drugs_hashes)
+    drugs_hashes.each do |drug_name, data_hash|
+      drug_id = Drug.find_id_by_name(self.db, drug_name)
+      CohortsDrugs.insert_row(self.db, data_hash["use"], data_hash["frequency"], cohort_id, drug_id)
+    end
+  end
+
   def enter_data
     enter_drug_data(self.data)
     self.data.each do |row|
       cohort_id = Cohort.insert_row(self.db, row["age"], row["n"])
       drugs_hashes = parse_drug_data(row)
-      binding.pry
-      drug_id = Drug.find_id_by_name(self.db, drug_hash["drug_name"])
-      #CohortsDrugs.insert_row(self.db, drug_hash["usage"], drug_hash["frequency"], cohort_id, drug_id)
+      enter_cohorts_drugs_data(cohort_id, drugs_hashes)
     end
   end
 

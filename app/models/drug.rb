@@ -10,7 +10,7 @@ class Drug
     sql = <<-SQL
     SELECT id FROM drugs WHERE name = ?;
     SQL
-    db.execute(sql, name)
+    db.execute(sql, name)[0][0]
   end
 
   def self.insert_row(db, name)

@@ -8,3 +8,5 @@ sql_runner.create_tables
 csv_runner = CSVRunner.new(db, "/csv/drug-use-by-age.csv")
 csv_runner.to_hash
 csv_runner.enter_data
+
+Query.new(db)
