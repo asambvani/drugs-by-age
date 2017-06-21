@@ -71,4 +71,28 @@ class Query
       self.db.execute(sql)
     end
 
+    def self.most_users_by_drug
+      sql = <<-SQL
+        SELECT drugs.name, cohorts.age, cohorts_drugs.usage
+        FROM cohorts JOIN cohorts_drugs JOIN drugs
+        ON cohorts.id = cohorts_drugs.cohort_id
+        AND cohorts_drugs.drug_id = drugs.id
+        GROUP BY drugs.id
+        HAVING MAX(cohorts_drugs.usage)
+      SQL
+      self.db.execute(sql)
+    end
+
+    def self.most_frequent_users_by_drug
+      sql = <<-SQL
+        SELECT drugs.name, cohorts.age, cohorts_drugs.frequency
+        FROM cohorts JOIN cohorts_drugs JOIN drugs
+        ON cohorts.id = cohorts_drugs.cohort_id
+        AND cohorts_drugs.drug_id = drugs.id
+        GROUP BY drugs.id
+        HAVING MAX(cohorts_drugs.frequency)
+      SQL
+      self.db.execute(sql)
+    end
+
 end
