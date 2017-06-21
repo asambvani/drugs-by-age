@@ -35,7 +35,7 @@ class Query
     self.db.execute(sql)
   end
 
-  def self.most_popular_by_cohort
+  def self.most_popular_drugs_by_cohort
     sql = <<-SQL
       SELECT drugs.name, cohorts.age, cohorts_drugs.usage
       FROM cohorts JOIN cohorts_drugs JOIN drugs
