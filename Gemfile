@@ -6,3 +6,4 @@ gem 'sqlite3'
 gem 'pry'
 gem 'json'
 gem "rake"
+gem "graphviz"
